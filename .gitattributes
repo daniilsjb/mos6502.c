@@ -1,0 +1,10 @@
+# Use LF as the default line endings within the repository.
+* text=auto
+
+# Assembly code for tests is taken from external sources.
+tests/**/*.asm linguist-vendored
+tests/**/*.s   linguist-vendored
+tests/**/*.a   linguist-vendored
+
+# Ensure that ROM files are not accidentally corrupted.
+*.bin binary

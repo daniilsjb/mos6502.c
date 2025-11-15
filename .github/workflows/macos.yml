@@ -1,0 +1,35 @@
+name: "macOS"
+on:
+  - push
+  - pull_request
+jobs:
+  main:
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - llvm
+          - gcc
+        type:
+          - Debug
+          - Release
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@v1
+
+      - name: "Setup C/C++"
+        uses: aminya/setup-cpp@v1
+        with:
+          compiler: ${{ matrix.compiler }}
+          cmake: true
+          ninja: true
+
+      - name: "Configure CMake"
+        run: cmake -S . -B ./build -DCMAKE_BUILD_TYPE:STRING=${{ matrix.type }}
+
+      - name: "Build"
+        run: cmake --build ./build --config ${{ matrix.type }}
+
+      - name: "Test"
+        run: cd build && ctest -C ${{ matrix.type }} --verbose
