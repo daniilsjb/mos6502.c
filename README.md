@@ -43,8 +43,8 @@ typical flow of emulating a 6502-based system will consist of roughly the same s
 
 To run the tests for this project, you will need the following to be installed and available on your system:
 
-* C99 (e.g., MSVC, GCC, or Clang)
-* CMake 4.0
+* C11 (e.g., MSVC, GCC, or Clang)
+* CMake 3.30
 
 After cloning the repository, testing the emulator is as simple as running standard CMake commands:
 
