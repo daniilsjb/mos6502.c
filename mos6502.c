@@ -289,7 +289,7 @@ static void am_abx(mos6502_t *cpu) {
     am_abs_indexed(cpu, cpu->x, true);
 }
 
-/* Absolute,X addressing (read-only) */
+/* Absolute,X addressing (specialized for read instructions) */
 static void am_rbx(mos6502_t *cpu) {
     am_abs_indexed(cpu, cpu->x, false);
 }
@@ -299,7 +299,7 @@ static void am_aby(mos6502_t *cpu) {
     am_abs_indexed(cpu, cpu->y, true);
 }
 
-/* Absolute,Y addressing (read-only) */
+/* Absolute,Y addressing (specialized for read instructions) */
 static void am_rby(mos6502_t *cpu) {
     am_abs_indexed(cpu, cpu->y, false);
 }
