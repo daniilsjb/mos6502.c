@@ -402,7 +402,7 @@ static mos6502_status_t adc_dec(mos6502_t *cpu, uint8_t value) {
     return MOS6502_OK;
 }
 
-/* ADC - Add Memory to Accumulator with Carry */
+/* ADC - Add memory to accumulator with carry */
 static mos6502_status_t op_adc(mos6502_t *cpu) {
     uint8_t value = read(cpu, cpu->mar);
     if (cpu->has_bcd && get_flags(cpu, MOS6502_D)) {
@@ -412,14 +412,14 @@ static mos6502_status_t op_adc(mos6502_t *cpu) {
     }
 }
 
-/* AND - Logical AND with Accumulator */
+/* AND - Logical AND with accumulator */
 static mos6502_status_t op_and(mos6502_t *cpu) {
     cpu->a &= read(cpu, cpu->mar);
     set_flags_zn(cpu, cpu->a);
     return MOS6502_OK;
 }
 
-/* ASL - Arithmetic Shift Left */
+/* ASL - Arithmetic shift left */
 static mos6502_status_t op_asl(mos6502_t *cpu) {
     uint8_t value = read(cpu, cpu->mar);
     write(cpu, cpu->mar, value);
@@ -429,7 +429,7 @@ static mos6502_status_t op_asl(mos6502_t *cpu) {
     return MOS6502_OK;
 }
 
-/* ASL - Shift Accumulator Left */
+/* ASL - Arithmetic shift left (on accumulator) */
 static mos6502_status_t op_asl_acc(mos6502_t *cpu) {
     set_flags(cpu, MOS6502_C, cpu->a >> 7);
     cpu->a <<= 1;
@@ -460,22 +460,22 @@ static mos6502_status_t branch(mos6502_t *cpu, bool condition) {
     }
 }
 
-/* BCC - Branch on Carry Clear */
+/* BCC - Branch on carry clear */
 static mos6502_status_t op_bcc(mos6502_t *cpu) {
     return branch(cpu, !get_flags(cpu, MOS6502_C));
 }
 
-/* BCS - Branch on Carry Set */
+/* BCS - Branch on carry set */
 static mos6502_status_t op_bcs(mos6502_t *cpu) {
     return branch(cpu, get_flags(cpu, MOS6502_C));
 }
 
-/* BEQ - Branch on Result Zero */
+/* BEQ - Branch on result zero */
 static mos6502_status_t op_beq(mos6502_t *cpu) {
     return branch(cpu, get_flags(cpu, MOS6502_Z));
 }
 
-/* BIT - Test Bits in Memory with Accumulator */
+/* BIT - Test bits in memory with accumulator */
 static mos6502_status_t op_bit(mos6502_t *cpu) {
     uint8_t a = cpu->a;
     uint8_t b = read(cpu, cpu->mar);
@@ -485,55 +485,55 @@ static mos6502_status_t op_bit(mos6502_t *cpu) {
     return MOS6502_OK;
 }
 
-/* BMI - Branch on Result Minus */
+/* BMI - Branch on result minus */
 static mos6502_status_t op_bmi(mos6502_t *cpu) {
     return branch(cpu, get_flags(cpu, MOS6502_N));
 }
 
-/* BNE - Branch on Result Not Zero */
+/* BNE - Branch on result not zero */
 static mos6502_status_t op_bne(mos6502_t *cpu) {
     return branch(cpu, !get_flags(cpu, MOS6502_Z));
 }
 
-/* BPL - Branch on Result Plus */
+/* BPL - Branch on result plus */
 static mos6502_status_t op_bpl(mos6502_t *cpu) {
     return branch(cpu, !get_flags(cpu, MOS6502_N));
 }
 
-/* BRK - Force Interrupt */
+/* BRK - Force interrupt */
 static mos6502_status_t op_brk(mos6502_t *cpu) {
     return handle_software_interrupt(cpu);
 }
 
-/* BVC - Branch on Overflow Clear */
+/* BVC - Branch on overflow clear */
 static mos6502_status_t op_bvc(mos6502_t *cpu) {
     return branch(cpu, !get_flags(cpu, MOS6502_V));
 }
 
-/* BVS - Branch on Overflow Set */
+/* BVS - Branch on overflow set */
 static mos6502_status_t op_bvs(mos6502_t *cpu) {
     return branch(cpu, get_flags(cpu, MOS6502_V));
 }
 
-/* CLC - Clear Carry Flag */
+/* CLC - Clear carry flag */
 static mos6502_status_t op_clc(mos6502_t *cpu) {
     set_flags(cpu, MOS6502_C, 0);
     return MOS6502_OK;
 }
 
-/* CLD - Clear Decimal Mode */
+/* CLD - Clear decimal mode */
 static mos6502_status_t op_cld(mos6502_t *cpu) {
     set_flags(cpu, MOS6502_D, 0);
     return MOS6502_OK;
 }
 
-/* CLI - Clear Interrupt Disable */
+/* CLI - Clear interrupt disable */
 static mos6502_status_t op_cli(mos6502_t *cpu) {
     set_flags(cpu, MOS6502_I, 0);
     return MOS6502_OK;
 }
 
-/* CLV - Clear Overflow Flag */
+/* CLV - Clear overflow flag */
 static mos6502_status_t op_clv(mos6502_t *cpu) {
     set_flags(cpu, MOS6502_V, 0);
     return MOS6502_OK;
@@ -545,22 +545,22 @@ static mos6502_status_t compare(mos6502_t *cpu, uint8_t lhs, uint8_t rhs) {
     return MOS6502_OK;
 }
 
-/* CMP - Compare Accumulator */
+/* CMP - Compare accumulator */
 static mos6502_status_t op_cmp(mos6502_t *cpu) {
     return compare(cpu, cpu->a, read(cpu, cpu->mar));
 }
 
-/* CPX - Compare X Register */
+/* CPX - Compare X register */
 static mos6502_status_t op_cpx(mos6502_t *cpu) {
     return compare(cpu, cpu->x, read(cpu, cpu->mar));
 }
 
-/* CPY - Compare Y Register */
+/* CPY - Compare Y register */
 static mos6502_status_t op_cpy(mos6502_t *cpu) {
     return compare(cpu, cpu->y, read(cpu, cpu->mar));
 }
 
-/* DEC - Decrement Memory */
+/* DEC - Decrement memory */
 static mos6502_status_t op_dec(mos6502_t *cpu) {
     uint8_t value = read(cpu, cpu->mar);
     write(cpu, cpu->mar, value);
@@ -569,28 +569,28 @@ static mos6502_status_t op_dec(mos6502_t *cpu) {
     return MOS6502_OK;
 }
 
-/* DEX - Decrement X Register */
+/* DEX - Decrement X register */
 static mos6502_status_t op_dex(mos6502_t *cpu) {
     --cpu->x;
     set_flags_zn(cpu, cpu->x);
     return MOS6502_OK;
 }
 
-/* DEY - Decrement Y Register */
+/* DEY - Decrement Y register */
 static mos6502_status_t op_dey(mos6502_t *cpu) {
     --cpu->y;
     set_flags_zn(cpu, cpu->y);
     return MOS6502_OK;
 }
 
-/* EOR - Exclusive OR with Accumulator */
+/* EOR - Exclusive OR with accumulator */
 static mos6502_status_t op_eor(mos6502_t *cpu) {
     cpu->a ^= read(cpu, cpu->mar);
     set_flags_zn(cpu, cpu->a);
     return MOS6502_OK;
 }
 
-/* INC - Increment Memory */
+/* INC - Increment memory */
 static mos6502_status_t op_inc(mos6502_t *cpu) {
     uint8_t value = read(cpu, cpu->mar);
     write(cpu, cpu->mar, value);
@@ -599,21 +599,21 @@ static mos6502_status_t op_inc(mos6502_t *cpu) {
     return MOS6502_OK;
 }
 
-/* INX - Increment X Register */
+/* INX - Increment X register */
 static mos6502_status_t op_inx(mos6502_t *cpu) {
     ++cpu->x;
     set_flags_zn(cpu, cpu->x);
     return MOS6502_OK;
 }
 
-/* INY - Increment Y Register */
+/* INY - Increment Y register */
 static mos6502_status_t op_iny(mos6502_t *cpu) {
     ++cpu->y;
     set_flags_zn(cpu, cpu->y);
     return MOS6502_OK;
 }
 
-/* JMP - Jump to New Location */
+/* JMP - Jump to new location */
 static mos6502_status_t op_jmp(mos6502_t *cpu) {
     cpu->pc = cpu->mar;
     if (cpu->mar == cpu->iar) {
@@ -623,7 +623,7 @@ static mos6502_status_t op_jmp(mos6502_t *cpu) {
     }
 }
 
-/* JSR - Jump to Subroutine */
+/* JSR - Jump to subroutine */
 static mos6502_status_t op_jsr(mos6502_t *cpu) {
     cpu->pc++; /* The low byte has already been pre-fetched. */
 
@@ -640,28 +640,28 @@ static mos6502_status_t op_jsr(mos6502_t *cpu) {
     return MOS6502_OK;
 }
 
-/* LDA - Load Accumulator */
+/* LDA - Load accumulator */
 static mos6502_status_t op_lda(mos6502_t *cpu) {
     cpu->a = read(cpu, cpu->mar);
     set_flags_zn(cpu, cpu->a);
     return MOS6502_OK;
 }
 
-/* LDX - Load X Register */
+/* LDX - Load X register */
 static mos6502_status_t op_ldx(mos6502_t *cpu) {
     cpu->x = read(cpu, cpu->mar);
     set_flags_zn(cpu, cpu->x);
     return MOS6502_OK;
 }
 
-/* LDY - Load Y Register */
+/* LDY - Load Y register */
 static mos6502_status_t op_ldy(mos6502_t *cpu) {
     cpu->y = read(cpu, cpu->mar);
     set_flags_zn(cpu, cpu->y);
     return MOS6502_OK;
 }
 
-/* LSR - Logical Shift Right */
+/* LSR - Logical shift right */
 static mos6502_status_t op_lsr(mos6502_t *cpu) {
     uint8_t value = read(cpu, cpu->mar);
     write(cpu, cpu->mar, value);
@@ -671,7 +671,7 @@ static mos6502_status_t op_lsr(mos6502_t *cpu) {
     return MOS6502_OK;
 }
 
-/* LSR - Shift Accumulator Right */
+/* LSR - Logical shift right (on accumulator) */
 static mos6502_status_t op_lsr_acc(mos6502_t *cpu) {
     set_flags(cpu, MOS6502_C, cpu->a & 1);
     cpu->a >>= 1;
@@ -679,32 +679,32 @@ static mos6502_status_t op_lsr_acc(mos6502_t *cpu) {
     return MOS6502_OK;
 }
 
-/* NOP - No Operation */
+/* NOP - No operation */
 static mos6502_status_t op_nop(mos6502_t *cpu) {
     (void)cpu;
     return MOS6502_OK;
 }
 
-/* ORA - Logical OR with Accumulator */
+/* ORA - Logical OR with accumulator */
 static mos6502_status_t op_ora(mos6502_t *cpu) {
     cpu->a |= read(cpu, cpu->mar);
     set_flags_zn(cpu, cpu->a);
     return MOS6502_OK;
 }
 
-/* PHA - Push Accumulator onto Stack */
+/* PHA - Push accumulator onto stack */
 static mos6502_status_t op_pha(mos6502_t *cpu) {
     push(cpu, cpu->a);
     return MOS6502_OK;
 }
 
-/* PHP - Push Processor Status on Stack */
+/* PHP - Push processor status on stack */
 static mos6502_status_t op_php(mos6502_t *cpu) {
     push(cpu, cpu->p | MOS6502_B | MOS6502_U);
     return MOS6502_OK;
 }
 
-/* PLA - Pull Accumulator from Stack */
+/* PLA - Pull accumulator from stack */
 static mos6502_status_t op_pla(mos6502_t *cpu) {
     read(cpu, on_stack(cpu->s));
     cpu->a = pull(cpu);
@@ -712,14 +712,14 @@ static mos6502_status_t op_pla(mos6502_t *cpu) {
     return MOS6502_OK;
 }
 
-/* PLP - Pull Processor Status from Stack */
+/* PLP - Pull processor status from stack */
 static mos6502_status_t op_plp(mos6502_t *cpu) {
     read(cpu, on_stack(cpu->s));
     cpu->p = (uint8_t)((pull(cpu) & ~MOS6502_B) | MOS6502_U);
     return MOS6502_OK;
 }
 
-/* ROL - Rotate Left */
+/* ROL - Rotate left */
 static mos6502_status_t op_rol(mos6502_t *cpu) {
     uint8_t value = read(cpu, cpu->mar);
     write(cpu, cpu->mar, value);
@@ -734,7 +734,7 @@ static mos6502_status_t op_rol(mos6502_t *cpu) {
     return MOS6502_OK;
 }
 
-/* ROL - Rotate Accumulator Left */
+/* ROL - Rotate left (on accumulator) */
 static mos6502_status_t op_rol_acc(mos6502_t *cpu) {
     uint8_t c = get_flags(cpu, MOS6502_C);
     set_flags(cpu, MOS6502_C, cpu->a >> 7);
@@ -745,7 +745,7 @@ static mos6502_status_t op_rol_acc(mos6502_t *cpu) {
     return MOS6502_OK;
 }
 
-/* ROR - Rotate Right */
+/* ROR - Rotate right */
 static mos6502_status_t op_ror(mos6502_t *cpu) {
     uint8_t value = read(cpu, cpu->mar);
     write(cpu, cpu->mar, value);
@@ -760,7 +760,7 @@ static mos6502_status_t op_ror(mos6502_t *cpu) {
     return MOS6502_OK;
 }
 
-/* ROR - Rotate Accumulator Right */
+/* ROR - Rotate right (on accumulator) */
 static mos6502_status_t op_ror_acc(mos6502_t *cpu) {
     uint8_t c = get_flags(cpu, MOS6502_C);
     set_flags(cpu, MOS6502_C, cpu->a & 1);
@@ -771,7 +771,7 @@ static mos6502_status_t op_ror_acc(mos6502_t *cpu) {
     return MOS6502_OK;
 }
 
-/* RTI - Return from Interrupt */
+/* RTI - Return from interrupt */
 static mos6502_status_t op_rti(mos6502_t *cpu) {
     read(cpu, on_stack(cpu->s));
 
@@ -784,7 +784,7 @@ static mos6502_status_t op_rti(mos6502_t *cpu) {
     return MOS6502_OK;
 }
 
-/* RTS - Return from Subroutine */
+/* RTS - Return from subroutine */
 static mos6502_status_t op_rts(mos6502_t *cpu) {
     read(cpu, on_stack(cpu->s));
 
@@ -828,7 +828,7 @@ static mos6502_status_t sbc_dec(mos6502_t *cpu, uint8_t value) {
     return MOS6502_OK;
 }
 
-/* SBC - Subtract Memory from Accumulator with Borrow */
+/* SBC - Subtract memory from accumulator with borrow */
 static mos6502_status_t op_sbc(mos6502_t *cpu) {
     uint8_t value = read(cpu, cpu->mar);
     if (cpu->has_bcd && get_flags(cpu, MOS6502_D)) {
@@ -838,84 +838,84 @@ static mos6502_status_t op_sbc(mos6502_t *cpu) {
     }
 }
 
-/* SEC - Set Carry Flag */
+/* SEC - Set carry flag */
 static mos6502_status_t op_sec(mos6502_t *cpu) {
     set_flags(cpu, MOS6502_C, 1);
     return MOS6502_OK;
 }
 
-/* SED - Set Decimal Flag */
+/* SED - Set decimal flag */
 static mos6502_status_t op_sed(mos6502_t *cpu) {
     set_flags(cpu, MOS6502_D, 1);
     return MOS6502_OK;
 }
 
-/* SEI - Set Interrupt Disable */
+/* SEI - Set interrupt disable */
 static mos6502_status_t op_sei(mos6502_t *cpu) {
     set_flags(cpu, MOS6502_I, 1);
     return MOS6502_OK;
 }
 
-/* STA - Store Accumulator in Memory */
+/* STA - Store accumulator in memory */
 static mos6502_status_t op_sta(mos6502_t *cpu) {
     write(cpu, cpu->mar, cpu->a);
     return MOS6502_OK;
 }
 
-/* STX - Store X Register in Memory */
+/* STX - Store X register in memory */
 static mos6502_status_t op_stx(mos6502_t *cpu) {
     write(cpu, cpu->mar, cpu->x);
     return MOS6502_OK;
 }
 
-/* STY - Store Y Register in Memory */
+/* STY - Store Y register in memory */
 static mos6502_status_t op_sty(mos6502_t *cpu) {
     write(cpu, cpu->mar, cpu->y);
     return MOS6502_OK;
 }
 
-/* TAX - Transfer Accumulator to X */
+/* TAX - Transfer accumulator to X */
 static mos6502_status_t op_tax(mos6502_t *cpu) {
     cpu->x = cpu->a;
     set_flags_zn(cpu, cpu->x);
     return MOS6502_OK;
 }
 
-/* TAY - Transfer Accumulator to Y */
+/* TAY - Transfer accumulator to Y */
 static mos6502_status_t op_tay(mos6502_t *cpu) {
     cpu->y = cpu->a;
     set_flags_zn(cpu, cpu->y);
     return MOS6502_OK;
 }
 
-/* TSX - Transfer Stack Pointer to X */
+/* TSX - Transfer stack pointer to X */
 static mos6502_status_t op_tsx(mos6502_t *cpu) {
     cpu->x = cpu->s;
     set_flags_zn(cpu, cpu->x);
     return MOS6502_OK;
 }
 
-/* TXA - Transfer X to Accumulator */
+/* TXA - Transfer X to accumulator */
 static mos6502_status_t op_txa(mos6502_t *cpu) {
     cpu->a = cpu->x;
     set_flags_zn(cpu, cpu->a);
     return MOS6502_OK;
 }
 
-/* TXS - Transfer X to Stack Pointer */
+/* TXS - Transfer X to stack pointer */
 static mos6502_status_t op_txs(mos6502_t *cpu) {
     cpu->s = cpu->x;
     return MOS6502_OK;
 }
 
-/* TYA - Transfer Y to Accumulator */
+/* TYA - Transfer Y to accumulator */
 static mos6502_status_t op_tya(mos6502_t *cpu) {
     cpu->a = cpu->y;
     set_flags_zn(cpu, cpu->a);
     return MOS6502_OK;
 }
 
-/* Unknown / Unofficial Instruction */
+/* Unknown instruction */
 static mos6502_status_t op_unk(mos6502_t *cpu) {
     (void)cpu;
     return MOS6502_UNKNOWN;
