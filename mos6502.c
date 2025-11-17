@@ -2,10 +2,6 @@
  * mos6502.c - see license at the bottom, no warranty implied, use at your own risk;
  *   made by daniilsjb (https://github.com/daniilsjb/mos6502.c)
  *
- * The following is an implementation of a MOS 6502 Technology CPU in standard C99.
- * Since the code is fairly long, it is organized into sections to ease navigation,
- * but is otherwise intended to be read from top to bottom.
- *
  * Arguably, the most interesting aspect of emulating a 6502 has to do with encoding
  * all the different combinations of operations and addressing modes for each opcode.
  * There is a wide variety of interesting ways to accomplish that, from preprocessing
