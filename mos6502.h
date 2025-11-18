@@ -408,7 +408,8 @@ MOS6502_API void mos6502_reset(mos6502_t *);
  */
 MOS6502_API mos6502_status_t mos6502_step(mos6502_t *);
 
-/* Sets the current signal of the IRQ line.
+/* 
+ * Sets the current signal of the IRQ line.
  *
  * The IRQ is active-low and level-detected, meaning that the interrupt will be
  * asserted for as long as the IRQ signal is held at zero while the IRQ Disable
@@ -424,7 +425,8 @@ MOS6502_API mos6502_status_t mos6502_step(mos6502_t *);
  */
 MOS6502_API void mos6502_set_irq(mos6502_t *, uint8_t new_irq_state);
 
-/* Sets the current signal of the NMI line.
+/* 
+ * Sets the current signal of the NMI line.
  *
  * The NMI is falling-edge-detected, meaning that the interrupt will be asserted
  * only once after the NMI signal goes from high to low. It is assumed that the
